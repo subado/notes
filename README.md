@@ -1,4 +1,4 @@
 # Notes📝
 
 This repository contains note about everything what I study.
-It is kinda knowlenge base.
+It is kinda knowledge base.

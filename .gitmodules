@@ -1,0 +1,3 @@
+[submodule "themes/subado"]
+	path = themes/subado
+	url = git@github.com:subado/hugo-subado

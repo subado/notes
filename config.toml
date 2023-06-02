@@ -1,0 +1,7 @@
+# baseURL = 'https://subado'
+languageCode = 'en-us'
+title = 'subado'
+theme = 'subado'
+
+[params]
+pagesLimit = 5

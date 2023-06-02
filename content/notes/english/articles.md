@@ -1,3 +1,8 @@
+---
+title: "Articles"
+date: 2023-05-22T11:13:38+04:00
+draft: true
+---
 # Articles
 
 **Article** — is a part of speech that stands for the identity of a noun.

@@ -3,5 +3,6 @@ languageCode = 'en-us'
 title = 'subado'
 theme = 'subado'
 
-[params]
-pagesLimit = 5
+[taxonomies]
+  category = 'categories'
+  tag = 'tags'

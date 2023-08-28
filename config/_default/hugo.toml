@@ -2,7 +2,3 @@
 languageCode = 'en-us'
 title = 'subado'
 theme = 'subado'
-
-[taxonomies]
-  category = 'categories'
-  tag = 'tags'

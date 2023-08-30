@@ -1,0 +1,4 @@
+[pagination]
+lastPagesNumber = 2
+pageGroupRadius = 2
+pagesDelimiter = "..."

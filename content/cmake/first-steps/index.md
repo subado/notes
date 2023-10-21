@@ -387,6 +387,9 @@ The following macros are recognized and evaluated:
 2. It is recommended that you call the cmake_minimum_required()
    command at the beginning of the script.
 
+Values passed to script will be stored in the `CMAKE_ARGV<n>` variable
+and the count of the passed arguments will be in the `CMAKE_ARGC`.
+
 ### Utility modules
 
 1. Contain macro definitions, variables, and commands that

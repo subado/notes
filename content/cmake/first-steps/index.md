@@ -366,7 +366,7 @@ The following macros are recognized and evaluated:
 - `${sourceDir}`: This is the path to the source tree.
 - `${sourceParentDir}`: This is the path to the source tree's parent directory.
 - `${sourceDirName}`: This is the last filename component of ${sourceDir}.
-  For example, for /home/rafal/project, it would be project.
+  For example, for /home/subado/zxc, it would be zxc.
 - `${presetName}`: This is the value of the preset's name field.
 - `${generator}`: This is the value of the preset's generator field.
 - `${dollar}`: This is a literal dollar sign ($).

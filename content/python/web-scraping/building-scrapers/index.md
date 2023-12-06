@@ -210,6 +210,48 @@ should ask yourself a few questions:
 
 ## 4 Web Crawling Models
 
+1. You have to understand what data you actually need.
+   To achieve this, you have to compare some websites that have required data.
+   Optional data may be stored in the field named attributes.
+2. Instead of writing standalone function to get data from each site
+   you can normalize data from sites and write code, in which websites' specifics
+   will be presented like function arguments.
+   The `BeautifulSoup.select()` will help you.
+3. There are a few basic ways to identify the page type:
+   - By the URL
+   - By the presence or lack of certain fields on a site
+   - By the presence of certain tags on the page to identify the page
+
+> Dealing with data with identical
+> and comparable fields is much easier than dealing with data that is completely
+> dependent on the format of its original source.
+
+## 5 Scrapy
+
+**Scrapy**(/ˈskreɪpaɪ/) is an application framework for crawling web sites and
+extracting structured data which can be used for a wide range of useful applications,
+like data mining, information processing or historical archival.
+[[docs](https://doc.scrapy.org/en/latest/)]
+
+**Spiders** are classes which define how a certain site (or a group of sites) will be scraped,
+including how to perform the crawl (i.e. follow links) and
+how to extract structured data from their pages (i.e. scraping items).
+
+- The `scrapy.spiders.Spider` is the simplest spider, and the one from which every other spider must inherit.
+
+- The `scrapy.spiders.CrawlSpider` is the most commonly used spider for crawling regular websites,
+  as it provides a convenient mechanism for following links by defining a set of rules.
+
+Spiders may return the extracted data as **items**, Python objects that define key-value pairs.
+
+The `scrapy` supports different types of data output formats(CSV, JSON, or XML).
+
+After an item has been scraped by a spider, it is sent to the **Item Pipeline**
+which processes it through several components that are executed sequentially.
+By default pipeline is disabled, but it can be activated if necessary.
+
+A `LOG_LEVEL` of `scrapy` output can be changed.
+
 ## 11 Scraping JavaScript
 
 ### What kind of beast is JS?

@@ -210,6 +210,129 @@ should ask yourself a few questions:
 
 ## 4 Web Crawling Models
 
+## 11 Scraping JavaScript
+
+### What kind of beast is JS?
+
+**JavaScript (JS)** is a lightweight interpreted (or just-in-time compiled) programming language with first-class functions.
+While it is most well-known as the scripting language for Web pages.
+Many modern websites use JS for scripts that are executing on the client-side and are making the site more interactive.
+
+To make page more interactive without reload it, websites developers use **AJAX** that is stands for
+**Asynchronous JavaScript and XML** and that is a web development technique in which a web app
+fetches content from the server by making asynchronous HTTP requests, and uses the new content to update
+the relevant parts of the page without requiring a full page load.
+
+If developers of the site, which you want to scrap, used AJAX, then
+it may lead to getting by your bot HTML, which doesn't contain all needed information, due to the fact that
+some website's content load using JS, but your bot didn't run JS.
+
+### Redirects
+
+**Client-side redirects** are page redirects that are executed in your browser by JavaScript,
+rather than a redirect performed on the server(**server-side redirects**), before the page content is sent.
+Cliet-side redirects are common nowadays.
+
+Client-side redirects lead to getting by your bot empty HTML, because of
+getting by your bot HTML before redirection, but if your bot doesn't execute JS then
+this redirection be never happened.
+
+### Using selenium to deal with JS
+
+**Selenium** is a toolset for web browser automation that uses the best techniques available to remotely control browser instances and emulate a user’s interaction with the browser.
+
+Selenium provides the abstract interface, which hides browser implementation from you
+and allows you to run same tests with different browsers.
+
+### How it works?
+
+**WebDriver** is a remote control interface that enables introspection and control of user agents.
+It provides a platform- and language-neutral wire protocol as a way for
+out-of-process programs to remotely instruct the behavior of web browsers.
+
+Selenium **WebDriver** refers to both the language bindings and
+the implementations of the individual browser controlling code.
+
+Selenium WebDriver is a [W3C Recommendation](https://www.w3.org/TR/webdriver1/).
+
+**Driver** is an interface that is responsible for controlling the actual browser.
+Some people refer to the drivers as proxies.
+
+This example of **direct communication**.
+![direct](images/direct.png)
+
+This example of **remote communication**.
+
+![remote](images/remote.png)
+
+This is another example of remote communication, where selenium server or selenium grid is used.
+
+![grid-framework](images/grid-framework.png)
+
+### Basic examples and recommendations
+
+Running browser in headless(without GUI) mode.
+
+```python
+from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
+
+options = Options()
+options.add_argument('--headless') # argument will added to the command that runs a browser
+driver = webdriver.Firefox(options=options)
+driver.get('MrRobot.Eliot')
+driver.close()
+```
+
+Handling client-side redirection(loading pages).
+
+```python
+from bs4 import BeautifulSoup
+from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+driver = webdriver.Firefox()
+driver.get('Loneliness.Cameback')
+
+try:
+    WebDriverWait(driver, 10).until(    # 10 is a timeout. selenium.common.exceptions.TimeoutException will be raised if timeout occurs
+        EC.presence_of_element_located((By.TAG_NAME, 'h1'))) # Imagine that only full loaded site has h1 tag
+finally:
+    bs = BeautifulSoup(driver.page_source, 'html.parser')
+    print(bs.h1)
+    driver.close()
+```
+
+Very long full loading of page([docs](https://www.w3.org/TR/webdriver1/#navigation)).
+
+```python
+from bs4 import BeautifulSoup
+from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+options = Options()
+options.set_capability('pageLoadStrategy', 'none') # default value is `normal`
+driver = webdriver.Firefox(options=options)
+
+driver.get('HateYourself.Truly')
+
+try:
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.TAG_NAME, 'h1'))) # A page, that has h1 tag, is enough for our goals
+finally:
+    bs = BeautifulSoup(driver.page_source, 'html.parser')
+    print(bs.h1)
+    driver.close()
+```
+
+Read the fucking [docs](https://www.selenium.dev/selenium/docs/api/py/api.html)!
+
 ## 14 Avoiding Scraping Traps
 
 Some websites may want to block **bots** (programs that do web scraping),
@@ -218,7 +341,7 @@ because bots can spam or cause server loads to be abnormal.
 ### How to avoid all websites' traps?
 
 1. Change your headers.
-   Especially `User-Agent`, `Accept` and `Accept-Language` fields.
+   Especially `User-Agent`, `Accept` and `Accept-Language` fields(maybe `Accept-Encoding` also).
 2. Save cookies to stay in login state.
 3. Set delays.
    You have to use `sleep` function because the website may block your IP
@@ -229,7 +352,7 @@ because bots can spam or cause server loads to be abnormal.
    - hidden forms filds that cause bot's `POST` requests to be incorrect.
    - hidden links or input after interacting with which bot's IP will be blocked.
 
-### How to recognize that traps while scrapping?
+### How to recognize that traps while scraping?
 
 1. The page that your bot got to differ from HTML that you see in the browser.
 2. A bot has an HTTP error when it is trying to get HTML.

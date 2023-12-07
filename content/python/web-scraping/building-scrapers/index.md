@@ -252,6 +252,13 @@ By default pipeline is disabled, but it can be activated if necessary.
 
 A `LOG_LEVEL` of `scrapy` output can be changed.
 
+### XPath
+
+**XPath** stands for XML Path Language.
+[XPath](https://www.w3.org/TR/xpath-31/) uses a path notation (as in URLs)
+for navigating through the hierarchical structure of an XML document.
+XPpath may be very useful for web scraping,and many libraries support XPath to selecting tags.
+
 ## 11 Scraping JavaScript
 
 ### What kind of beast is JS?

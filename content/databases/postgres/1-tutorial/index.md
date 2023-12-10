@@ -1,5 +1,5 @@
 ---
-title: "Tutorial to PostgreSQL"
+title: "1 Tutorial to PostgreSQL"
 date: 2023-11-10T19:33:00+04:00
 draft: true
 ---

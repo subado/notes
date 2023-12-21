@@ -168,6 +168,7 @@ The constraint can have a separate name.
 This clarifies error messages and allows you to refer
 to the constraint when you need to change it.
 This can be done using the `CONSTRAINT` keyword.
+Otherwise postgres will generate name for your constraint automatically.
 
 You can write constraint that is not attached to a particular column,
 instead it appears as a separate item in the comma-separated column list.
@@ -203,6 +204,8 @@ the default behavior that the column might be null.
 > The `NULL` constraint is not present in the SQL standard.
 
 > In most database designs the majority of columns should be marked not null.
+
+`NOT NULL` constraints do not have names
 
 ### Unique Constraints
 
@@ -430,3 +433,138 @@ CREATE TABLE circles (
 
 Adding an exclusion constraint will automatically create an
 index of the type specified in the constraint declaration.
+
+## 5 System Columns
+
+Every table has several system columns that are implicitly defined by the system.
+These names cannot be used as names of user-defined columns.
+
+- `tableoid`.
+
+  The OID(object identifier) of the table containing this row.
+
+- `xmin`
+
+  The identity (transaction ID) of the inserting transaction for this row version.
+
+  A **row version** is an individual state of a row;
+  each update of a row creates a new row version for the same logical row.
+
+- `cmin`
+
+  The command identifier (starting at zero) within the inserting transaction.
+
+- `xmax`
+
+  The identity (transaction ID) of the deleting transaction, or zero for an undeleted row version.
+
+- `cmax`
+
+  The command identifier within the deleting transaction, or zero.
+
+- `ctid`
+  The physical location of the row version within its table.
+
+Transaction identifiers and command identifiers are 32-bit quantities.
+
+## 6 Modifying Tables
+
+PostgreSQL provides a family of commands to alter the definition, or structure, of the table.
+
+### Adding a Column
+
+```sql
+ALTER TABLE name ADD [ COLUMN ] [ IF NOT EXISTS ] column_name data_type [ COLLATE collation ] [ column_constraint [ ... ] ];
+```
+
+If a column with a constant default value added, then
+the default value will be returned the next time the row is accessed.
+
+However, if the default value is volatile (e.g., `clock_timestamp()`) each row will need
+to be updated with the value calculated at the time `ALTER TABLE` is executed.
+
+In this case better to add column with no default,
+to do `UPDATE` with the correct values for columns which shouldn't have default values,
+and to add default value to column.
+
+### Removing a Column
+
+```sql
+ALTER TABLE name DROP [ COLUMN ] [ IF EXISTS ] column_name [ RESTRICT | CASCADE ];
+```
+
+Table constraints involving the column are dropped, too.
+However, if the column is referenced by a foreign key constraint of another table, PostgreSQL will
+not silently drop that constraint, and you need to use `CASCADE` in this case.
+
+### Adding a Constraint
+
+```sql
+ALTER TABLE name ADD table_constraint [ NOT VALID ];
+```
+
+To add a not-null constraint, which cannot be written as a table constraint, use this syntax:
+
+```sql
+ALTER TABLE name ALTER COLUMN column SET NOT NULL;
+```
+
+### Removing a Constraint
+
+To remove a constraint you need to know its name.
+If you specified constraint name, then it is a easy task.
+Otherwise, to find out a constraint generated name assigned by the system,
+you can use the psql command `\d tablename`.
+
+```sql
+ALTER TABLE tablename DROP CONSTRAINT some_name;
+```
+
+To drop a not null constraint use:
+
+```sql
+ALTER TABLE tablename ALTER COLUMN some_name DROP NOT NULL;
+```
+
+### Changing a Column's Default Value
+
+```sql
+ALTER TABLE tablename ALTER COLUMN some_name SET DEFAULT some_value;
+```
+
+It just changes the default for future `INSERT` commands.
+
+To remove any default value, use:
+
+```sql
+ALTER TABLE tablename ALTER COLUMN some_name DROP DEFAULT;
+```
+
+It is not an error to drop a default where one hadn't been defined,
+because the default is implicitly the null value.
+
+### Changing a Column's Data Type
+
+```sql
+ALTER TABLE tablename ALTER COLUMN some_name TYPE some_type;
+```
+
+This will succeed only if each existing entry in the column
+can be converted to the new type by an implicit cast.
+
+If a more complex conversion is needed, you can add a `USING` clause that
+specifies how to compute the new values from the old.
+
+### Renaming a Column
+
+```sql
+ALTER TABLE tablename RENAME [ COLUMN ] column_name TO new_column_name;
+```
+
+### Renaming a Table
+
+```sql
+ALTER TABLE tablename RENAME TO new_name;
+```
+
+## 7 Privileges

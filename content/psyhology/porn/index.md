@@ -19,7 +19,7 @@ less attracted to real three-dimensional women(men) than to two-dimensional pict
 
 The high-speed internet porn allows people to watch enormous amount of porn.
 
-From the end of 2010 many men and women shared with the internet their porn addictions.
+From the end of 2010 many men and women has shared with the internet their porn addictions.
 
 Common Symptoms of porn addiciton:
 
@@ -175,3 +175,201 @@ that physically and chemically alter the reward centre.
 
 - **Lack of motivation and healthy anticipation**, which can lead to
   apathy, procrastination, and even play a role in depression.
+
+## 3 Regaining Control
+
+### Recommended Suggestions
+
+1. **Managing access**
+
+- Remove all porn
+
+- Move your furniture around
+
+  (because your environment can be associated with porn)
+
+- Consider a porn blocker and an ad blocker
+
+  (may be dangerous for gamers)
+
+- Consider a day-counter
+
+  (you need to realise that counted days aren't game points)
+
+- Extinction training (not for everyone)
+
+  (You weaken the link or
+  pathway between a stimulus and a habitual response.)
+
+2. **Support**
+
+- Join a forum, get an accountability partner
+
+- Therapy, support groups, healthcare
+
+- Keep a journal
+
+  (A journal will help you to look on your way and your progress)
+
+3. **Managing Stress, Improving Self-control and Self-care**
+
+- Exercise, beneficial stressors
+
+  (Acute bouts of exercise increase dopamine
+  concentrations, and regular exercise leads to sustained increases in
+  dopamine and related adjustments.)
+
+  Maybe you should take a cold shower.
+
+- Get outside
+
+- Socializing
+
+- Meditation, relaxation techniques
+
+  (increase willpower)
+
+- Creative pursuits, hobbies, life purpose
+
+4. **Attitude, Education and Inspiration**
+
+- Be gentle with yourself
+
+  (Accept your humanness and love sex)
+
+- Learn more about what’s going on in your brain
+
+- Keep yourself inspired
+
+### Rebooting Challenges
+
+1. **Withdrawal**
+
+   (You will be more emotional)
+
+2. **Flatline**
+
+   > The gruelling, mysterious
+   > initiation one endures but never speaks of.
+
+   The **flatline** is a temporary loss of libido.
+
+3. **Insomnia**
+
+   > It's important to stay well rested as
+   > fatigue can trigger porn use.
+
+4. **Triggers**
+
+   > The external factors that make you
+   > think about porn.
+
+   When you feel The Urge, ask yourself:
+
+   - What emotions I am feeling?
+   - What time is it?
+   - Who else is around?
+   - What did I just do?
+   - Where I am?
+   - What could I do instead that would meet my needs?
+
+5. **Emotions**
+
+   > People who quit porn often remark
+   > that they feel more emotions.
+
+6. **Chaser**
+
+   The term **chaser** is often used to describe intense cravings that
+   sometimes follow orgasm
+
+7. **Disturbing dreams, flashbacks**
+
+   > Vivid dreams seem to be a normal part
+   > of the mental housecleaning
+   > process of unhooking.
+
+8. **Shame cycle**
+   A ‘shame-binge-shame’ cycle exist due to the fact, that
+   dopamine rises sharply when you feel shame.
+
+### Common Pitfalls
+
+1. **Edging**
+
+   **Edging** is masturbating up to the edge
+   of orgasm, repeatedly, without climaxing.
+
+2. **Fantasising**
+
+   Fantasising or imagining an experience activates many
+   of the same neural circuits as performing it.
+
+3. **Using porn substitutes**
+
+4. **Forcing sexual performance prematurely (ED)**
+
+   > Those with porn-related sexual dysfunction often find that
+   > they heal faster if they allow their libido to reawaken naturally.
+
+5. **Assuming a fetish is permanent**
+
+   > Only by process of elimination will you know whether you
+   > are dealing with a porn-induced superficial 'fetish' or a true fetish
+   > arising from the core of your sexual identity.
+
+6. **The bad urge**
+
+   > The fact is that all urges die down eventually,
+   > usually within quarter of an hour.
+
+### Common Questions
+
+- **How long should I reboot?**
+
+  Time is specific for particular person because brains are different.
+
+- **Can I have sex during my reboot?**
+
+  Some people find a temporary time-out from all
+  sexual stimulation gives the brain a much needed rest and speeds
+  recovery.
+
+- **Should I reduce masturbation?**
+
+  It is better if you give masturbation a rest for a while.
+
+- **How do I know when I'm back to normal?**
+
+  - You feel like flirting with potential mates, who look a lot more
+    attractive.
+
+  - You are getting morning wood (or ‘semis’) frequently.
+
+  - You can orgasm without an intense chaser effect.
+
+  - Intercourse with a partner feels fantastic (Note: You may have a
+    bit of premature ejaculation or delayed ejaculation early on. Practice
+    makes perfect.)
+
+  - Your libido changes
+
+- **How do I know that I don't just have a high libido?**
+
+  Give up porn and porn fantasy and see what
+  your libido is like a few weeks later.
+
+- **How can I get excited by real partners? (ED)**
+
+  Spend time around real potential partners and
+  limit all sexual fantasy to real people and realistic sexual scenarios.
+
+## Concluding Reflections
+
+Here is the schema:
+
+1.  Exciting, but bad-in-long-term behaviour is introduced for money.
+2.  People get hooked.
+3.  Precise, scientiﬁcally backed-up research takes decades to kick-in.
+4.  Hooked people start to get educated.
+5.  They start behaviour-elimination.

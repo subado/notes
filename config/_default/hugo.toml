@@ -2,3 +2,8 @@
 languageCode = 'en-us'
 title = 'subado'
 theme = 'subado'
+
+
+[markup]
+  [markup.highlight]
+  style = 'base16-snazzy'

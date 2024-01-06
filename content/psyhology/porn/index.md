@@ -370,6 +370,6 @@ Here is the schema:
 
 1.  Exciting, but bad-in-long-term behaviour is introduced for money.
 2.  People get hooked.
-3.  Precise, scientiﬁcally backed-up research takes decades to kick-in.
+3.  Precise, scientifically backed-up research takes decades to kick-in.
 4.  Hooked people start to get educated.
 5.  They start behaviour-elimination.

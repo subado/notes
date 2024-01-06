@@ -88,7 +88,10 @@ In the **batch system**, a tray full of jobs was collected in the input room and
 **Off line** means not connected to the main computer.
 
 The structure of a typical input job:
+
+```
 $JOB -> $FORTRAN -> FORTRAN program -> $LOAD -> $RUN -> Data for program -> $END.
+```
 
 ### 2.3 The Third Generation (1965–1980): ICs and Multiprogramming
 
@@ -191,3 +194,435 @@ In 1997, Ericsson coined the term **smartphone**.
 **Android** is dominant due to open sources.
 
 ## 3 COMPUTER HARDWARE REVIEW
+
+An operating system is intimately tied to the hardware of the computer it runs on.
+It extends the computer’s instruction set and manages its resources.
+
+### 3.1 Processors
+
+The **CPU** is the 'brain' of the computer.
+
+Cycle of every CPU:
+
+1. fetch the first instruction from memory
+2. decode it to determine its type and operands
+3. execute it
+4. fetch the next instruction from memory
+
+Each CPU has a specific set of instructions that it can execute.
+
+All CPUs contain some registers inside to hold key variables and temporary results.
+
+Special registers:
+
+- **program counter**
+
+  contains the memory address of the next instruction to be fetched and
+  automatically updates to the next instruction after fetching current instruction.
+
+- **stack pointer**
+
+  points to the top of the current stack in memory.
+
+  The **stack** contains one frame for each procedure
+  that has been entered but not yet exited.
+
+  A procedure's stack frame holds those input parameters,
+  local variables, and temporary variables that are not kept in registers.
+
+- **PSW (Program Status Word)**
+
+  contains the condition code bits, which are set by comparison instructions, the CPU
+  priority, the mode (user or kernel), and various other control bits.
+
+When time multiplexing the CPU, the operating system will often stop
+the running program to (re)start another one.
+Every time it stops a running program, the operating system
+must save all the registers so they can be restored when the program runs later.
+
+Many modern CPUs have facilities for executing more than one instruction at the same time:
+
+- **pipeline**
+
+  CPU might have separate fetch, decode, and execute units
+  and all this units would be busy at the same time.
+
+- **superscalar**
+
+  CPU might have multiple execution units and
+  instructions stored into holding buffer before executing if particular execution unit was busy.
+  Instructions are often executed out of order and this foisted onto the operating system.
+
+**system call** is a special kind of procedure call that has the additional property
+of switching from user mode to kernel mode.
+
+The `TRAP` instruction switches from user mode to kernel mode and starts the operating system.
+
+**Moore's law**
+
+> The number of transistors on a chip doubles every 18 months.
+
+**multithreading** or **hyperthreading** allows the CPU to hold the state of
+several different threads and then switch back and forth on a nanosecond time scale.
+
+Each thread appears to the operating system as a _separate CPU_.
+
+**Cores** are complete processors.
+
+A **GPU(Graphics Processing Unit)** is a processor with, literally, thousands of tiny cores.
+
+### 3.2 Memory
+
+A typical memory hierarchy
+
+| Access time | Name          | Capacity |
+| ----------- | ------------- | -------- |
+| 1nsec       | Registers     | <1 KB    |
+| 2nsec       | Cache         | 4 MB     |
+| 10nsec      | Main memory   | 1-8 GB   |
+| 10msec      | Magnetic disk | 1-4 TB   |
+
+The **registers** are placed inside the CPU and fast as the CPU.
+
+Main memory is divided up into **cache lines**, typically 64 bytes.
+The most heavily used cache lines are kept in a high-speed cache.
+A **cache hit** happens when the program needs to read a memory word and
+the cache hardware found the needed line in the cache.
+
+In any caching system, several questions come up fairly soon, including:
+
+1. When to put a new item into the cache.
+2. Which cache line to put the new item in.
+3. Which item to remove from the cache when a slot is needed.
+4. Where to put a newly evicted item in the larger memory.
+
+(16 KB)**L1 cache** is the first level of cache that is placed inside the CPU and
+usually feeds decoded instructions into the CPU's execution engine.
+
+(several megabytes)**L2 cache** is the second level of cache that holds several megabytes of
+recently used memory words.
+
+The difference between the L1 and L2 caches lies in the timing.
+
+Main memory is usually called **RAM (Random Access Memory)** or **core memory**, that is volatile.
+All CPU requests that cannot be satisfied out of the cache go to main memory.
+
+**ROM (Read Only Memory)** is a non-volatile random-access memory,
+that is programmedat the factory and cannot be changed afterward.
+
+**EEPROM (Electrically Erasable PROM)** and **flash memory** are also non-
+volatile, but in contrast to ROM can be erased and rewritten.
+
+**Flash memory** wears out, if it is erased too many times.
+
+**CMOS memory** is the volatile memory which many computers use to hold the current time and date.
+
+### 3.2 Disks
+
+**hard disk** is a mechanical device that is used to store big quantities of data.
+
+A disk consists of one or more metal rotating **platters**.
+Information is written onto the disk in a series of concentric circles.
+
+At any given arm position, each of the heads can read an annular region called a **track**.
+Together, all the tracks for a given arm position form a **cylinder**.
+Each track is divided into some number of **sectors**.
+
+**SSDs (Solid State Disk)** store a lot of data in (Flash) memory.
+
+**Virtual memory** makes it possible to run programs larger than physical memory
+by placing them on the disk and using main memory
+as a kind of cache for the most heavily executed parts.
+
+**MMU (Memory Management Unit)** converts the addresses generated by the program
+to the physical address in RAM where the word is located.
+
+A **context switch** is a switching from one program to another.
+
+### 3.4 I/O Devices
+
+I/O devices consist of two parts:
+
+- **controller**
+
+  is a chip or a set of chips that physically controls the device.
+
+- device itself
+
+Devices have fairly simple interfaces, both because
+they cannot do much and to make them standard.
+
+A **device driver** is the software that talks to a controller,
+giving it commands and accepting responses.
+
+3 ways the driver can be put into the kernel:
+
+1. to relink the kernel with the new driver and then reboot the system
+
+2. to make an entry in an operating system file telling it that
+   it needs the driver and then reboot the system
+
+3. to accept new drivers while running and install them on the fly without the need to reboot
+
+The **I/O port space** is the collection of all the device registers.
+
+2 ways of modifying devices registers:
+
+1. the device registers are mapped into the operating system's address space
+
+2. special IN and OUT instructions are available in kernel mode
+   to allow drivers to read and write the registers
+
+3 ways of input and output:
+
+1. **busy waiting**
+
+   A user program ->_(system call)_ the kernel ->_(procedure call)_ -> the appropriate driver.
+
+   The driver waits until the device isn't done and returns the data.
+
+   The operating system then returns control to the caller.
+
+   \- the _disadvantage_ of tying up the CPU polling the device until it is finished.
+
+2. **interrupt**
+
+   The driver tells the controller what to do by writing into its device registers.
+   The controller then starts the device.
+
+   The controller signals the interrupt controller chip using certain bus lines, when it has finished.
+
+   If the interrupt controller is ready to accept the interrupt,
+   it asserts a pin on the CPU chip telling it.
+
+   The interrupt controller puts the number of the device on the bus.
+
+   The CPU switches into kernel mode and starts appropriate inetrrupt handler,
+   which the CPU determines due to interrupt vector.
+
+   The **interrupt vector** is memory in which the device number may be used as an index to
+   find the address of the interrupt handler for this device.
+
+   When the **interrupt handler** is all finished,
+   it returns to the previously running user program
+   to the first instruction that was not yet executed.
+
+3. **DMA (Direct Memory Access) chip**
+
+   can control the flow of bits between memory and
+   some controller without constant CPU intervention.
+   The DMA chip causes interrupt if it is finished.
+
+### 3.5 Buses
+
+**Buses** are used to transfer data between components of a system.
+
+The main bus is the **PCIe (Peripheral Component Interconnect Express)** bus.
+
+A **shared bus architecture** means that multiple devices use the same wires to transfer data.
+
+A **parallel bus architecture** means that you send each word of data over multiple wires.
+
+A **serial bus architecture** means that all bits will be sent in message through a single connection, known as a **lane**.
+
+Buses:
+**DMI (Direct Media Interface)**,
+**USB (Universal Serial Bus)**,
+**SCSI (Small Computer System Interface)**.
+
+In the **plug and play** PC system design, the system automatically collect information
+about the I/O devices, centrally assign interrupt levels and I/O addresses,
+and then tell each card what its numbers are.
+
+### 3.6 Booting the Computer
+
+**BIOS (Basic Input Output System)** contains low-level I/O software.
+It is held in a flash RAM, which can be updated by the OS.
+
+1. Scanning the PCIe and PCI buses
+
+2. Configuring new devices
+
+3. Examining the partition table at the end of the boot
+   sector to determine which partition is active
+
+4. The loader reads in the operating system
+   from the active partition and starts it
+
+5. The OS queries the BIOS to get the configuration information
+
+6. The OS start if drivers are presented for all devices
+
+## 4 THE OPERATING SYSTEM ZOO
+
+### 4.1 Mainframe Operating Systems
+
+- prodigious amounts of I/O
+- gigantic I/O capacity
+
+3 kinds of services:
+
+- **batch**
+
+  processes routine jobs without any interactive user present
+
+- **transaction processing**
+
+  handle large numbers of small requests
+
+- **timesharing**
+
+allow multiple remote users to run jobs on the computer at once
+
+### 4.2 Server Operating Systems
+
+- multiple users at once over a network
+
+- allows the users to share resources
+
+### 4.3 Multiprocessor Operating Systems
+
+Multiple CPUs are connected into a single system to
+get major-league computing power.
+
+And specific OSs are required to deal with this CPUs.
+
+### 4.4 Personal Computer Operating Systems
+
+- good support to a single user
+
+### 4.5 Handheld Computer Operating Systems
+
+**PDA (Personal Digital Assistant)**
+
+- a lot of sensors
+
+- third-party applications (**apps**)
+
+### 4.6 Embedded Operating Systems
+
+- run on the computers that control devices
+
+- do not accept user-installed software
+
+- all the software is in ROM
+
+### 4.7 Sensor-Node Operating Systems
+
+- networks of tiny sensor nodes
+
+- each sensor node is a real computer
+
+- small and simple
+
+### 4.8 Real-Time Operating Systems
+
+- the action absolutely must occur at a certain moment
+
+1. **hard real-time system**
+
+2. **soft real-time system**
+
+### 4.9 Smart Card Operating Systems
+
+- the smallest operating systems
+
+- some are Java oriented
+
+- severe power limits
+
+## 5 OPERATING SYSTEM CONCEPTS
+
+### 5.1 Processes
+
+A **process** is basically a program in execution.
+Processes have two parts:
+
+1. address space,
+2. process table entry.
+
+A **address space** a associated with process list of memory locations
+from 0 to some maximum, which the process can read and write.
+
+Periodically, the operating system decides to stop running
+one process and start running another.
+The first process is **suspend**.
+
+When a process is temporarily suspended,
+all information about process must be saved.
+
+The **process table** is a system table (an array of structures)
+that consists all information about each process.
+
+The **core image** is process's address space.
+
+**Child processes** are processes that were created by another process.
+
+**interprocess communication**.
+
+**Signals** are the software analog of hardware interrupts.
+When a process receive a signal, then special signal-handling procedure is started.
+
+Each user in the system has **UID (User IDentification)** and **GID (Group IDentification)**.
+Every process started has the UID of the person who started it.
+
+The **superuser** , or **Administrator**, is a user with special powers.
+
+### 5.2 Address Spaces
+
+The OS need to keep processes from writing to address spaces of another processes.
+
+Computers addresses are 32 or 64 bits.
+
+**Virtual memory** is a technique in which the OS
+keeps part of the address space in main memory and part on
+disk and shuttles pieces back and forth between them as needed.
+
+Address space is decoupled from computer main memory.
+
+### 5.3 Files
+
+**Files** are abstract model.
+
+A **directory** is a way of grouping files together.
+
+The file hierarchies are organized as tree.
+
+The **root directory** is the top of the directory hierarchy.
+
+Every file can be specified by its **path name**.
+
+Each process has a current **working directory**.
+
+Path names can be
+
+- **absolute**(unique path from root directory) and
+- **relative**(path from working directory).
+
+A **file descriptor** is a integer associated with file.
+
+**root file system**.
+
+To access files from some external media you have to **mount**
+device file system on a directory of the root file system
+(have to be attached to the root file system).
+
+**Special files** are provided in order to make I/O devices look like files.
+
+**Block special files** are used to model devices that
+consist of a collection of randomly addressable blocks.
+
+**Character special files** are used to model devices that accept or output a character stream.
+
+A **pipe** is a sort of pseudofile that can be used to connect two processes.
+
+### 5.4 Input/Output
+
+Every OS has an I/O subsystem for managing its I/O devices.
+
+### 5.5 Protection
+
+The OS manage the security of files
+(In UNIX OS a 9-bit binary(**rwx**) protection code is assigned to each file).
+
+## 6 SYSTEM CALLS

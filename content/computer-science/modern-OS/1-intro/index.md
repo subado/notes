@@ -626,3 +626,63 @@ The OS manage the security of files
 (In UNIX OS a 9-bit binary(**rwx**) protection code is assigned to each file).
 
 ## 6 SYSTEM CALLS
+
+A system call mechanism are often implemented in assembly code.
+
+Steps to perform a system call:
+
+1. Push parameters onto the stack.
+2. Call the library procedure.
+3. Put the system-call number in a register.
+4. Trap to the kernel (switch to kernel mode and jump to the specific allowed address).
+5. Execution at a fixed address within the kernel.
+6. Find needed handler in a table of pointers to system-call handlers indexed on system-call number.
+7. The system-call handler runs.
+8. Trap to the user-space and return to the library procedure.
+9. Return to the user program.
+10. Increment $SP$ to clear the stack.
+
+### 6.1 System Calls for Process Management
+
+**PID** stands for Process IDentifier.
+
+Processes in UNIX have their memory divided up into three segments:
+
+1. the **text segment** (the program code)
+
+2. the **data segment** (the variables)
+
+   - grows upward
+   - expansion should be done with special system call(`brk()`)
+
+3. the **stack segment**
+
+   - grows downward
+   - expansion happens automatically
+
+### 6.2 System Calls for File Management
+
+Associated with each file is a pointer that indicates the current position in the file.
+
+The `lseek()` call changes the value of the position pointer.
+
+### 6.3 System Calls for Directory Management
+
+Every file in UNIX has a unique number, its **i-number**, that identifies it.
+
+A i-number is an index into a table of **i-nodes**, one per file,
+telling who owns the file, where its disk blocks are, and so on.
+
+**Partitions or minor devices** are portions of hard disks.
+
+### 6.4 Miscellaneous System Calls
+
+In the year 2106, `time()` value will be overflowed.
+
+### 6.5 The Windows Win32 API
+
+A set of procedures called the **Win32 API (Application Programming Interface)**.
+
+## 7 OPERATING SYSTEM STRUCTURE
+
+### 7.1 Monolithic Systems

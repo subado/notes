@@ -737,3 +737,10 @@ A set of procedures called the **Win32 API (Application Programming Interface)**
 - Each virtual machine can use only resources assigned to it.
 
 - Each user-level virtual machine can run its own OS.
+
+## 8 THE WORLD ACCORDING TO C
+
+A **pointer** is a variable that points to
+(i.e., contains the address of) a variable or data structure.
+
+A **object file** contain binary instructions for the target machine.

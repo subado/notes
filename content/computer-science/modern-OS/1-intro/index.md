@@ -686,3 +686,54 @@ A set of procedures called the **Win32 API (Application Programming Interface)**
 ## 7 OPERATING SYSTEM STRUCTURE
 
 ### 7.1 Monolithic Systems
+
+- The all OS is a large executable.
+
+- Structure of levels of procedures.
+
+- loadable extensions are **DLLs (Dynamic-Link Libraries)** or **shared libraries**.
+
+### 7.2 Layered Systems
+
+- Each layer setups new abstractions and allows layers
+  above use this abstractions with system calls.
+
+### 7.3 Microkernels
+
+- The OS is set of modules.
+
+- Each module are independent.
+
+- There are several layers of modules.
+
+- **reincarnation server**.
+
+- **Mechanism** are placed in the kernel but not the **policy**.
+
+### 7.4 Client-Server Model
+
+- Two classes of processes: the **servers** and the **clients**.
+
+- Servers and clients can be different machines.
+
+### 7.5 Virtual Machines
+
+1. **type 1 hypervisor**
+
+   - Manages all resources by itself.
+
+2. **type 2 hypervisor**
+
+   - Uses a host operating system
+
+- Allows install several independent OSs on the one machine.
+
+- **binary translation**.
+
+- The guest OS does the same thing it does on the actual hardware.
+
+### 7.6 Exokernels
+
+- Each virtual machine can use only resources assigned to it.
+
+- Each user-level virtual machine can run its own OS.

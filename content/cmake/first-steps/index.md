@@ -342,7 +342,7 @@ Presets are defined as maps with the following fields:
   a string value of either "TRUE" or "FALSE". Cache variables are inherited with
   a union operation unless the value is specified as null – then, it remains unset.
   String values support macro expansion.
-- **Environment**: This is an optional map of environment variables where keys
+- **environment**: This is an optional map of environment variables where keys
   denote variable names. Accepted values include null or string values. Environment
   variables are inherited with a union operation unless the value is specified as null
   – then, it remains unset. String values support macro expansion, and variables
